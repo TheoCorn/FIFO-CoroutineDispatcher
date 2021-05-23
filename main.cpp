@@ -7,8 +7,10 @@
 #include <string>
 
 void print(void* arg){
-    std::cout<< *reinterpret_cast<std::string*>(arg) <<std::endl;
-    delete reinterpret_cast<std::string*>(arg);
+//    std::cout<< *reinterpret_cast<std::string*>(arg) <<std::endl;
+//    delete reinterpret_cast<std::string*>(arg);
+
+    std::cout<<"runnable" <<std::endl;
 }
 
 int main() {
@@ -18,13 +20,13 @@ int main() {
 
     for (int i = 0; i < 100; ++i) {
         std::string str = std::to_string(i);
-        mtl::Runnable runnable(fun, &str, true);
+        mtl::Runnable runnable(fun, nullptr, true);
         looper.add(&runnable);
     }
 
 
     looper.run();
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(10));
     looper.stopAndJoin();
 
 }
